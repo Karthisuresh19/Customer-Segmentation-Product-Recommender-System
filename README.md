@@ -1,47 +1,94 @@
-This project aims to analyze customer behavior and preferences through segmentation based on recency, frequency, and monetary values (RFM), as well as to provide personalized product recommendations using cosine similarity.
+# Customer Segmentation & Product Recommender System
 
-Table of Contents
-Introduction
-Features
-Customer Segmentation
-Product Recommender System
-Usage
-Dependencies
+An end-to-end data science project focused on analyzing customer behavior, segmenting customers using RFM analysis, and providing personalized product recommendations based on user similarities.
 
+---
 
-Introduction
-Understanding customer behavior and preferences is crucial for businesses to tailor their marketing strategies and enhance customer satisfaction. This project employs RFM analysis to segment customers based on their transaction history and subsequently builds a product recommender system to suggest relevant products to users.
+## Table of Contents
+- [Introduction](#introduction)
+- [Key Features](#key-features)
+- [Project Structure](#project-structure)
+- [Methodology](#methodology)
+  - [Customer Segmentation (RFM)](#customer-segmentation-rfm)
+  - [Product Recommender System](#product-recommender-system)
+- [Getting Started](#getting-started)
+  - [Dependencies](#dependencies)
+  - [Installation & Usage](#installation--usage)
+- [Dataset](#dataset)
 
-Features
-RFM Analysis: Segmentation of customers based on recency, frequency, and monetary values of their purchases.
-Product Recommender System: Utilizes cosine similarity to identify relevant unbought products for a user.
+---
 
+## Introduction
+Understanding customer behavior and preferences is crucial for tailoring marketing strategies and enhancing customer satisfaction. This project employs **RFM (Recency, Frequency, Monetary)** analysis to segment customers intelligently based on their transaction history. Subsequently, it builds a **collaborative filtering** product recommender system using cosine similarity to suggest highly relevant, unpurchased products to existing users.
 
-Customer Segmentation
-Customer segmentation is performed using the RFM model, which categorizes customers based on the following criteria:
-Recency: How recently a customer has made a purchase.
-Frequency: How often a customer makes purchases.
-Monetary: The total amount of money a customer has spent.
-By analyzing these factors, customers are segmented into distinct groups, allowing businesses to target their marketing efforts more effectively.
+## Key Features
+- **RFM Analysis:** Data-driven segmentation of customers based on recency, frequency, and monetary values of their purchases.
+- **Collaborative Recommender System:** Utilizes user-user cosine similarity to identify relevant unbought products for a user.
+- **Data Analytics:** Extensive exploratory data analysis and modeling stored cleanly in Jupyter Notebooks.
 
-Product Recommender System
-The product recommender system utilizes cosine similarity to identify similar users and with that, products that are not yet pruchased by a user but bought by the user's similar users are recommended to a user. The process involves the following steps:
+## Project Structure
+```text
+Customer-Segmentation-Product-Recommender-System/
+│
+├── Customer_Segmentation_RFM.ipynb    # Jupyter Notebook for RFM Analysis & Segmentation
+├── Product_Recommender_System.ipynb   # Jupyter Notebook for Cosine Similarity Recommendation
+├── Online_shopping.xlsx               # Source dataset (Customer transaction history)
+├── DataFrame/                         # Directory containing processed data / dataframes
+└── README.md                          # Project documentation (You are here)
+```
 
-Calculate the cosine similarity between the users' purchase history
-Note the users with the highest cosine similarity scores to our user.
-With the noted similar users purchase information, we can recommend products to our user accordingly
+## Methodology
 
-Usage
-To use the customer segmentation and product recommender system:
+### Customer Segmentation (RFM)
+Customer segmentation is performed using the robust RFM model, which categorizes customers based on three critical criteria:
+- **Recency:** How recently a customer has made a purchase.
+- **Frequency:** How often a customer makes purchases.
+- **Monetary:** The total amount of money a customer has spent.
 
-Ensure that the necessary data (customer transaction history, product inventory) is available.
-Run the segmentation algorithm to categorize customers based on RFM values.
-Implement the product recommender system to generate personalized recommendations for users.
+By analyzing these factors, customers are clustered into distinct groups, allowing businesses to target their marketing efforts effectively.
 
-Dependencies
-The project relies on the following dependencies:
+### Product Recommender System
+The recommendation engine identifies similar users using **Cosine Similarity**. The intuition is that if User A and User B share similar purchase histories, products bought by User B (but not yet by User A) can be confidently recommended to User A.
 
-numpy
-pandas
-scikit-learn
-Ensure that these dependencies are installed to successfully run the project.
+**Workflow:**
+1. Compute the cosine similarity matrix between users based on their purchase history.
+2. Identify users with the highest similarity scores to a target user.
+3. Extract products purchased by those similar users.
+4. Filter out products already bought by the target user.
+5. Recommend the highest-ranking candidate products.
+
+## Getting Started
+
+### Dependencies
+This project requires **Python 3.x** and the following libraries:
+- `numpy`
+- `pandas`
+- `scikit-learn`
+- `matplotlib` & `seaborn` (for data visualizations and plots)
+- `jupyter` (to run the notebooks)
+
+### Installation & Usage
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Karthisuresh19/Customer-Segmentation-Product-Recommender-System.git
+   cd Customer-Segmentation-Product-Recommender-System
+   ```
+
+2. **Install the required packages:**
+   ```bash
+   pip install numpy pandas scikit-learn matplotlib seaborn jupyter
+   ```
+
+3. **Ensure Data Availability:**
+   Make sure the `Online_shopping.xlsx` dataset file is present in the project root directory.
+
+4. **Run the Notebooks:**
+   Launch Jupyter Notebook from your terminal:
+   ```bash
+   jupyter notebook
+   ```
+   - Open `Customer_Segmentation_RFM.ipynb` and execute the cells to perform the RFM segmentation.
+   - Open `Product_Recommender_System.ipynb` to explore and execute the recommender system.
+
+## Dataset
+The project currently uses the dataset provided in the `Online_shopping.xlsx` file. If you use an external or updated dataset, ensure it contains the necessary standard fields (e.g., customer ID, transaction dates, product details, purchase amounts) to remain compatible with the analysis.
